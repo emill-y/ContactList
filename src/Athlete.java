@@ -30,7 +30,7 @@ public class Athlete extends Person{
             return super.toString() + " Sport: " + sport + " Athlete is injured :( ";
         }
         else {
-            return super.toString() + " Sport: " + sport + " Athlete is not injured :)"
+            return super.toString() + " Sport: " + sport + " Athlete is not injured :)";
         }
     }
 }
