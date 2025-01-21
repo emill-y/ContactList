@@ -174,7 +174,7 @@ public class ContactList {
         run();
     }
 
-    public static void main(String args[]){
+    public static void main(String[] args){
         ArrayList<Person> contacts = new ArrayList<Person>();
         Student ella = new Student("Ella", "Young", "6502938476", 10);
         Student david = new Student("David", "Elder", "8573928390", 12);
