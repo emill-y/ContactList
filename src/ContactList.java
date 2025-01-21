@@ -176,8 +176,8 @@ public class ContactList {
 
     public static void main(String args[]){
         ArrayList<Person> contacts = new ArrayList<Person>();
-        Student ella = new Student("Ella", "Y", "6502938476", 10);
-        Student david = new Student("David", "E", "8573928390", 12);
+        Student ella = new Student("Ella", "Young", "6502938476", 10);
+        Student david = new Student("David", "Elder", "8573928390", 12);
         contacts.add(ella);
         contacts.add(david);
         ContactList newList = new ContactList(contacts);
