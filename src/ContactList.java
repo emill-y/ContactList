@@ -50,33 +50,34 @@ public class ContactList {
     public void sort(int sortBy){
         int n = contacts.size();
         for (int i = 0; i < n-1; i++){
-            for (int j = 0; i < n - 1 - i; j++){
-                char first;
-                char second;
-                if (sortBy == 1){
-                    first = contacts.get(i).getFirstName().charAt(0);
-                    second = contacts.get(i).getFirstName().charAt(1);
+            for (int j = i+1; j < n; j++){
+                String first;
+                String second;
+                if (sortBy == 0){
+                    first = contacts.get(i).getFirstName();
+                    second = contacts.get(j).getFirstName();
                 }
-                else if (sortBy == 2){
-                    first = contacts.get(i).getLastName().charAt(0);
-                    second = contacts.get(i).getLastName().charAt(1);
+                else if (sortBy == 1){
+                    first = contacts.get(i).getLastName();
+                    second = contacts.get(j).getLastName();
                 }
                 else {
-                    first = contacts.get(i).getPhoneNumber().charAt(0);
-                    second = contacts.get(i).getPhoneNumber().charAt(1);
+                    first = contacts.get(i).getPhoneNumber();
+                    second = contacts.get(j).getPhoneNumber();
                 }
-                if (first > second) {
+                if (first.compareToIgnoreCase(second) > 0) {
                     Person temp = contacts.get(i);
                     contacts.set(i, contacts.get(j));
                     contacts.set(j, temp);
                 }
                 }
         }
+        printContacts();
     }
 
     public Person searchByFirstName(String firstName){
         for (Person person : contacts){
-            if (person.getFirstName().equals(firstName)) {
+            if (person.getFirstName().equalsIgnoreCase(firstName)) {
                 return person;
             }
         }
@@ -84,7 +85,7 @@ public class ContactList {
     }
     public Person searchByLastName(String lastName){
         for (Person person : contacts){
-            if (person.getLastName().equals(lastName)) {
+            if (person.getLastName().equalsIgnoreCase(lastName)) {
                 return person;
             }
         }
@@ -92,7 +93,7 @@ public class ContactList {
     }
     public Person searchByPhoneNumber(String phoneNumber){
         for (Person person : contacts){
-            if (person.getPhoneNumber().equals(phoneNumber)) {
+            if (person.getPhoneNumber().equalsIgnoreCase(phoneNumber)) {
                 return person;
             }
         }
@@ -114,6 +115,72 @@ public class ContactList {
 
         Scanner s = new Scanner(System.in);
         int key = s.nextInt();
+        switch(key) {
+            case 0: System.exit(0);
+                break;
+            case 1: addContact();
+                break;
+            case 2:
+                sort(0);
+                break;
+            case 3:
+                sort(1);
+                break;
+            case 4:
+                sort(2);
+                break;
+            case 5:
+                listStudents();
+                break;
+            case 6:
+                s.nextLine();
+                System.out.println("Enter a First Name:");
+                String firstName = s.nextLine();
+                Person resultName = searchByFirstName(firstName);
+                if(resultName == null){
+                    System.out.println(firstName + " is not in the list");
+                }
+                else{
+                    System.out.println(resultName);
+                }
+                break;
+            case 7:
+                s.nextLine();
+                System.out.println("Enter a Last Name:");
+                String lastName = s.nextLine();
+                Person result = searchByLastName(lastName);
+                if (result ==  null) {
+                    System.out.println(lastName + " is not in the list");
+                }
+                else{
+                    System.out.println(result);
+                }
+                break;
+            case 8:
+                s.nextLine();
+                System.out.println("Enter a Phone Number:");
+                String phoneNumber = s.nextLine();
+                Person resultNumber = searchByPhoneNumber(phoneNumber);
+                if(resultNumber == null){
+                    System.out.println(phoneNumber + " is not in the list");
+                }
+                else {
+                    System.out.println(resultNumber);
+                }
+                break;
+            default:
+                break;
+        }
+        run();
+    }
 
+    public static void main(String args[]){
+        ArrayList<Person> contacts = new ArrayList<Person>();
+        Student ella = new Student("Ella", "Y", "6502938476", 10);
+        Student david = new Student("David", "E", "8573928390", 12);
+        contacts.add(ella);
+        contacts.add(david);
+        ContactList newList = new ContactList(contacts);
+        newList.run();
     }
 }
